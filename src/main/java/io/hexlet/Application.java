@@ -32,6 +32,13 @@ public class Application {
                     System.out.println(resultSet.getString("phone"));
                 }
             }
+
+            var sql4 = "DELETE FROM users WHERE username = ?";
+            try (var statement4 = conn.prepareStatement(sql4)) {
+                statement4.setString(1, "tommy");
+                var rowsDeleted = statement4.executeUpdate();
+                System.out.println("Records deleted: " + rowsDeleted);
+            }
         }
     }
 }
