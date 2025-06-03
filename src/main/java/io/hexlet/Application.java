@@ -2,6 +2,7 @@ package io.hexlet;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 public class Application {
     public static void main(String[] args) throws SQLException {
@@ -15,7 +16,9 @@ public class Application {
             dao.save(tommy);
             dao.save(alex);
 
-            System.out.println(dao.findByID(1L).get().getName());
+            System.out.println(dao.findByID(1L)
+                .orElseThrow(() -> new NoSuchElementException("User not found"))
+                .getName());
             tommy.setName("mommy");
             dao.save(tommy);
             dao.showAll();
